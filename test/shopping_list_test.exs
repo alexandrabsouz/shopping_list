@@ -5,7 +5,12 @@ defmodule ShoppingListTest do
   alias ShoppingList
 
   @emails ["alexandra@email.com", "pedro@email.com", "paulo@email.com"]
-  @duplicated_emails ["alexandra@email.com", "pedro@email.com", "paulo@email.com", "paulo@email.com"]
+  @duplicated_emails [
+    "alexandra@email.com",
+    "pedro@email.com",
+    "paulo@email.com",
+    "paulo@email.com"
+  ]
 
   @items [["maçã", 10, 300], ["pizza", 5, 10], ["carne", 5, 4000]]
   @items_inválid_quantity [["maçã", 0, 300], ["pizza", 5, 10], ["carne", 5, 4000]]
@@ -27,8 +32,8 @@ defmodule ShoppingListTest do
     test "when duplicate email, count just one person" do
       response = ShoppingList.fetch_lists(@items, @duplicated_emails)
 
-      total_email
-        = response
+      total_email =
+        response
         |> Enum.count()
 
       refute total_email == Enum.count(@duplicated_emails)
@@ -37,7 +42,7 @@ defmodule ShoppingListTest do
     test "when empty email, returns an error" do
       response = ShoppingList.fetch_lists(@items, [])
 
-      expected_response =  {:error, :empty_email_list}
+      expected_response = {:error, :empty_email_list}
 
       assert ^response = expected_response
     end
@@ -53,7 +58,7 @@ defmodule ShoppingListTest do
     test "when quantity item is <= 0, returns a error" do
       response = ShoppingList.fetch_lists(@items_inválid_quantity, @emails)
 
-      expected_response =  %{error: :invalid_quantity, item: "maçã"}
+      expected_response = %{error: :invalid_quantity, item: "maçã"}
 
       assert ^response = expected_response
     end
