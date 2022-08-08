@@ -1,11 +1,11 @@
 # ShoppingList
 
-**TODO: Add description**
+**TODO: [Stone Test] - Receives a list of items and a list of emails,
+  handles and returns the division of values ​​for each email**
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `shopping_list` to your list of dependencies in `mix.exs`:
+
 
 ```elixir
 def deps do
