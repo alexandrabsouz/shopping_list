@@ -10,11 +10,13 @@ defmodule ShoppingList do
 
   ## Examples
 
-      iex> ShoppingList.fetch_lists()
+      iex> items = [["maçã", 10, 300], ["pizza", 5, 10], ["carne", 5, 4000]]
+      iex> emails = ["alexandra@email.com", "pedro@email.com", "paulo@email.com"]
+      iex> ShoppingList.fetch_lists(items, emails)
       [
-        %{email: "alexandra@email.com", value: 74334},
-        %{email: "pedro@email.com", value: 74333},
-        %{email: "paulo@email.com", value: 74333}
+        %{email: "alexandra@email.com", value: 7684},
+        %{email: "pedro@email.com", value: 7683},
+        %{email: "paulo@email.com", value: 7683}
       ]
 
   """
@@ -28,7 +30,6 @@ defmodule ShoppingList do
          uniq_emails <- Enum.uniq(emails),
          count_emails <- Enum.count(uniq_emails),
          map_emails <- Enum.map(uniq_emails, fn email -> %{email: email, value: nil} end) do
-
       Calculate.split_bill(total, count_emails, map_emails)
     end
   end
