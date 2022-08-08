@@ -4,10 +4,6 @@ defmodule ShoppingList do
   """
   alias ShoppingList.Calculate
 
-  @emails ["alexandra@email.com", "pedro@email.com", "paulo@email.com"]
-  @items [["maçã", 10, 300], ["pizza", 5, 10], ["carne", 5, 4000]]
-
-
   @doc """
   Receives a list of items and a list of emails,
   handles and returns the division of values ​​for each email
@@ -23,7 +19,11 @@ defmodule ShoppingList do
 
   """
 
-  def fetch_lists(items \\ @items, emails \\ @emails) do
+  def fetch_lists([], _emails), do: {:error, :empty_item_list}
+
+  def fetch_lists(_items, []), do: {:error, :empty_email_list}
+
+  def fetch_lists(items, emails) do
     with {:ok, total} <- Calculate.sum_values(items),
          uniq_emails <- Enum.uniq(emails),
          count_emails <- Enum.count(uniq_emails),
