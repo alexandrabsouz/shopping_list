@@ -42,12 +42,12 @@ sudo apt-get install build-essential erlang-dev erlang-xmerl erlang-tools
 
 ~$ mix coveralls
 
-Randomized with seed 28348
+Randomized with seed 694932
 ----------------
 COV    FILE                                        LINES RELEVANT   MISSED
 100.0% lib/shopping_list.ex                           36        5        0
-100.0% lib/shopping_list/calculate.ex                 58       15        1
-[TOTAL]  100.0%
+100.0% lib/shopping_list/calculate.ex                 72       15        0
+[TOTAL] 100.0%
 ----------------
 ```
 
