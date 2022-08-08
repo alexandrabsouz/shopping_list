@@ -36,7 +36,7 @@ sudo apt-get install build-essential erlang-dev erlang-xmerl erlang-tools
 ```
 
 
-#### Per cent tests coberture using coveralls
+#### Percent tests coberture using coveralls
 
 ```bash
 
