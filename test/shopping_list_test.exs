@@ -13,8 +13,10 @@ defmodule ShoppingListTest do
   ]
 
   @items [["maçã", 10, 300], ["pizza", 5, 10], ["carne", 5, 4000]]
-  @items_inválid_quantity [["maçã", 0, 300], ["pizza", 5, 10], ["carne", 5, 4000]]
-  @items_inválid_value [["maçã", 4, 300], ["pizza", 5, 0], ["carne", 5, 4000]]
+  @items_invalid_quantity [["maçã", 0, 300], ["pizza", 5, 10], ["carne", 5, 4000]]
+  @items_invalid_value [["maçã", 4, 300], ["pizza", 5, 0], ["carne", 5, 4000]]
+  @items_invalid_value_and_quantity [["maçã", 4, 300], ["pizza", 0, 0], ["carne", 5, 4000]]
+  @items_negative [["maçã", -10, 300], ["pizza", 5, -10], ["carne", 5, 4000]]
 
   describe "fetch_lists/2" do
     test "when all params is valid, returns split bill" do
@@ -48,7 +50,7 @@ defmodule ShoppingListTest do
     end
 
     test "when value item is <= 0, returns a error" do
-      response = ShoppingList.fetch_lists(@items_inválid_value, @emails)
+      response = ShoppingList.fetch_lists(@items_invalid_value, @emails)
 
       expected_response = %{error: :invalid_value, item: "pizza"}
 
@@ -56,7 +58,7 @@ defmodule ShoppingListTest do
     end
 
     test "when quantity item is <= 0, returns a error" do
-      response = ShoppingList.fetch_lists(@items_inválid_quantity, @emails)
+      response = ShoppingList.fetch_lists(@items_invalid_quantity, @emails)
 
       expected_response = %{error: :invalid_quantity, item: "maçã"}
 
@@ -67,6 +69,14 @@ defmodule ShoppingListTest do
       response = ShoppingList.fetch_lists([], @emails)
 
       expected_response = {:error, :empty_item_list}
+
+      assert ^response = expected_response
+    end
+
+    test "when quantity item and quantity is <= 0, returns a error" do
+      response = ShoppingList.fetch_lists(@items_invalid_value_and_quantity, @emails)
+
+      expected_response = %{error: :invalid_quantity_and_value, item: "pizza"}
 
       assert ^response = expected_response
     end
