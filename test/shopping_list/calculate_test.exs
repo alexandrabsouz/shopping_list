@@ -1,5 +1,6 @@
 defmodule ShoppingList.CalculateTest do
   use ExUnit.Case
+  doctest ShoppingList.Calculate
 
   alias ShoppingList.Calculate
 

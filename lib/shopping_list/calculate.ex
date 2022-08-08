@@ -2,11 +2,25 @@ defmodule ShoppingList.Calculate do
   @moduledoc """
     Calculate the values, sum and division functions
   """
-  defguard is_positive_number(value) when is_number(value) and value > 0
 
   @doc """
-    iex: sum_values([["maçã", 10, 200], ["pizza", 5, 40000], ["carne", 5, 4000]])
-    {:ok, 223000}
+    Validate if integer is positive
+
+   ## Examples
+    iex> import ShoppingList.Calculate
+    iex> is_positive_integer(-10)
+    false
+    iex> is_positive_integer(10)
+    true
+  """
+  defguard is_positive_integer(value) when is_integer(value) and value > 0
+
+  @doc """
+    Sum the values
+
+    ## Examples
+      iex> ShoppingList.Calculate.sum_values([["maçã", 10, 200], ["pizza", 5, 40000], ["carne", 5, 4000]])
+      {:ok, 223000}
   """
 
   def sum_values(items) when is_list(items) do
@@ -14,15 +28,15 @@ defmodule ShoppingList.Calculate do
       items
       |> Enum.reduce_while(0, fn
         [_item, quantity, item_value], acc
-        when is_positive_number(quantity) and is_positive_number(item_value) ->
+        when is_positive_integer(quantity) and is_positive_integer(item_value) ->
           {:cont, quantity * item_value + acc}
 
         [item, quantity, item_value], _acc
-        when is_positive_number(quantity) and not is_positive_number(item_value) ->
+        when is_positive_integer(quantity) and not is_positive_integer(item_value) ->
           {:halt, %{item: "#{item}", error: :invalid_value}}
 
         [item, quantity, item_value], _acc
-        when not is_positive_number(quantity) and is_positive_number(item_value) ->
+        when not is_positive_integer(quantity) and is_positive_integer(item_value) ->
           {:halt, %{item: "#{item}", error: :invalid_quantity}}
 
         [item, _quantity, _item_value], _acc ->
