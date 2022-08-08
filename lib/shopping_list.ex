@@ -1,9 +1,12 @@
 defmodule ShoppingList do
-  alias ShoppingList.Calculate
-
   @moduledoc """
   Documentation for `ShoppingList`.
   """
+  alias ShoppingList.Calculate
+
+  @emails ["alexandra@email.com", "pedro@email.com", "paulo@email.com"]
+  @items [["maçã", 10, 300], ["pizza", 5, 10], ["carne", 5, 4000]]
+
 
   @doc """
   Receives a list of items and a list of emails,
@@ -11,7 +14,7 @@ defmodule ShoppingList do
 
   ## Examples
 
-      iex> ShoppingList.fetch_lists(@items, @emails)
+      iex> ShoppingList.fetch_lists()
       [
         %{email: "alexandra@email.com", value: 74334},
         %{email: "pedro@email.com", value: 74333},
@@ -20,31 +23,13 @@ defmodule ShoppingList do
 
   """
 
-  @emails ["alexandra@email.com", "pedro@email.com", "paulo@email.com"]
-  @items [["maçã", 10, 300], ["pizza", 5, 40000], ["carne", 5, 4000]]
-
   def fetch_lists(items \\ @items, emails \\ @emails) do
-    with {:ok, items} <- validate_items_values(items)
-        {:ok, total} <- Calculate.sum_values(items),
+    with {:ok, total} <- Calculate.sum_values(items),
          uniq_emails <- Enum.uniq(emails),
          count_emails <- Enum.count(uniq_emails),
          map_emails <- Enum.map(uniq_emails, fn email -> %{email: email, value: nil} end) do
+
       Calculate.split_bill(total, count_emails, map_emails)
-    end
-  end
-
-  defp validate_items_values(items) do
-    values = Enum.map(items, fn [_item, _quantity, value] -> value end)
-    quantitys = Enum.map(items, fn [_item, quantity, _value] -> quantity end)
-
-    validate_values = Enum.map(values, fn value -> value <= 0 end)
-    validate_quantitys = Enum.map(quantitys, fn quantity -> quantity <= 0 end)
-
-    result = validate_values ++ validate_quantitys
-
-    case true in result do
-      true -> {:error, "aaaa"}
-      false -> {:ok}
     end
   end
 end
