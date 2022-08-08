@@ -46,8 +46,8 @@ Randomized with seed 28348
 ----------------
 COV    FILE                                        LINES RELEVANT   MISSED
 100.0% lib/shopping_list.ex                           36        5        0
- 93.3% lib/shopping_list/calculate.ex                 58       15        1
-[TOTAL]  95.0%
+100.0% lib/shopping_list/calculate.ex                 58       15        1
+[TOTAL]  100.0%
 ----------------
 ```
 
