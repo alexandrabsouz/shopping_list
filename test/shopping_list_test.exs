@@ -42,5 +42,22 @@ defmodule ShoppingListTest do
 
       assert ^response = expected_response
     end
+
+
+    test "when value item is <= 0, returns a error" do
+      response = ShoppingList.fetch_lists(@items_inválid_value, @emails)
+
+      expected_response = %{error: :invalid_value, item: "pizza"}
+
+      assert ^response = expected_response
+    end
+
+    test "when quantity item is <= 0, returns a error" do
+      response = ShoppingList.fetch_lists(@items_inválid_quantity, @emails)
+
+      expected_response =  %{error: :invalid_quantity, item: "maçã"}
+
+      assert ^response = expected_response
+    end
   end
 end
