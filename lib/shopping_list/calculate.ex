@@ -17,15 +17,15 @@ defmodule ShoppingList.Calculate do
         when is_positive_number(quantity) and is_positive_number(item_value) ->
           {:cont, quantity * item_value + acc}
 
-        [item, quantity, item_value], acc
+        [item, quantity, item_value], _acc
         when is_positive_number(quantity) and not is_positive_number(item_value) ->
           {:halt, %{item: "#{item}", error: :invalid_value}}
 
-        [item, quantity, item_value], acc
+        [item, quantity, item_value], _acc
         when not is_positive_number(quantity) and is_positive_number(item_value) ->
           {:halt, %{item: "#{item}", error: :invalid_quantity}}
 
-        [item, _quantity, _item_value], acc ->
+        [item, _quantity, _item_value], _acc ->
           {:halt, %{item: "#{item}", error: :invalid_quantity_and_value}}
       end)
 
