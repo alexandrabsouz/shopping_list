@@ -6,12 +6,17 @@ defmodule ShoppingList do
   """
 
   @doc """
-  Hello world.
+  Receives a list of items and a list of emails,
+  handles and returns the division of values ​​for each email
 
   ## Examples
 
-      iex> ShoppingList.hello()
-      :world
+      iex> ShoppingList.fetch_lists(@items, @emails)
+      [
+        %{email: "alexandra@email.com", value: 74334},
+        %{email: "pedro@email.com", value: 74333},
+        %{email: "paulo@email.com", value: 74333}
+      ]
 
   """
 
