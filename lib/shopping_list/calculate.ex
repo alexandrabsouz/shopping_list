@@ -17,15 +17,6 @@ defmodule ShoppingList.Calculate do
     {:ok, total}
   end
 
-  @doc """
-    iex: split_bill([223000, 3, *map_emails)
-    [
-      %{email: "alexandra@email.com", value: 74334},
-      %{email: "pedro@email.com", value: 74333},
-      %{email: "paulo@email.com", value: 74333}
-    ]
-  """
-
   def split_bill(total, count_emails, emails) do
     value_per_email = div(total, count_emails)
     rest = rem(total, count_emails)
