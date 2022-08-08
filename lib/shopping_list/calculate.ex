@@ -20,7 +20,7 @@ defmodule ShoppingList.Calculate do
 
     ## Examples
       iex> ShoppingList.Calculate.sum_values([["maçã", 10, 200], ["pizza", 5, 40000], ["carne", 5, 4000]])
-      {:ok, 223000}
+      {:ok, 222000}
   """
 
   def sum_values(items) when is_list(items) do
