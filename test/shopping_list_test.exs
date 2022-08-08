@@ -23,5 +23,24 @@ defmodule ShoppingListTest do
 
       assert response == expected_response
     end
+
+    test "when duplicate email, count just one person" do
+      response = ShoppingList.fetch_lists(@items, @duplicated_emails)
+
+      total_email
+        = response
+        |> Enum.count()
+
+      refute total_email == Enum.count(@duplicated_emails)
+    end
+
+
+    test "when empty email, returns an error" do
+      response = ShoppingList.fetch_lists(@items, [])
+
+      expected_response =  {:error, :empty_email_list}
+
+      assert ^response = expected_response
+    end
   end
 end
