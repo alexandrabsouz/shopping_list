@@ -34,7 +34,6 @@ defmodule ShoppingListTest do
       refute total_email == Enum.count(@duplicated_emails)
     end
 
-
     test "when empty email, returns an error" do
       response = ShoppingList.fetch_lists(@items, [])
 
@@ -42,7 +41,6 @@ defmodule ShoppingListTest do
 
       assert ^response = expected_response
     end
-
 
     test "when value item is <= 0, returns a error" do
       response = ShoppingList.fetch_lists(@items_inválid_value, @emails)
@@ -56,6 +54,14 @@ defmodule ShoppingListTest do
       response = ShoppingList.fetch_lists(@items_inválid_quantity, @emails)
 
       expected_response =  %{error: :invalid_quantity, item: "maçã"}
+
+      assert ^response = expected_response
+    end
+
+    test "when empty items list, returns a error" do
+      response = ShoppingList.fetch_lists([], @emails)
+
+      expected_response = {:error, :empty_item_list}
 
       assert ^response = expected_response
     end
