@@ -1,5 +1,12 @@
 defmodule ShoppingList.Calculate do
-  # @items [["maçã", 10, 200], ["pizza", 5, 40000], ["carne", 5, 4000]]
+  @moduledoc """
+    Calculate the values, sum and division functions
+  """
+
+  @doc """
+    iex: sum_values([["maçã", 10, 200], ["pizza", 5, 40000], ["carne", 5, 4000]])
+    {:ok, 223000}
+  """
 
   def sum_values(items) when is_list(items) do
     total =
@@ -15,8 +22,8 @@ defmodule ShoppingList.Calculate do
     rest = rem(total, count_emails)
 
     emails
-      |> set_value_in_emails(value_per_email)
-      |> maybe_increase_rest(rest)
+    |> set_value_in_emails(value_per_email)
+    |> maybe_increase_rest(rest)
   end
 
   defp set_value_in_emails(emails, value_per_email) do
